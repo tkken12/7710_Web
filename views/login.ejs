@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로그인</title>
+	<style>
+	    body {
+	        margin: 0;
+	        padding: 0;
+	        font-family: 'NanumGothic', 'serif';
+	        color: #403866;
+	    }
+	    
+	    .container {
+	    	width: 100%;
+	    	height: 400px;
+	    	text-align: center;
+	    }
+	    
+	    .sub_container {
+	    	position: relative;
+	    	top: 20%;
+	    	margin: 0 auto;
+	    	width: 80%;
+	    	height: 250px;
+	    	display: inline-block;
+	    }
+	    .nameform {
+	    	border-radius: 5px;
+	    	/* border: 2px solid #f0f0f0;*/
+	    }
+	    
+	    #login-form > div {
+	        margin: 15px 0;
+	    }
+
+	    .font15 {
+	    	font-size: 15px;
+	    	font-weight: 600;
+	    }
+
+		.font16 {
+	    	font-size: 15px;
+	    	font-weight: 400;
+			text-decoration: none;
+			color: #8f8fa1;
+	    }
+	    
+	    #login-form .login_box {
+	    	background-color: #e6e6e6;  
+	    	height: 40px;
+	    	width: 250px;
+	    	padding-left: 13px;
+	    	border: 1px solid #e6e6e6;
+	    	border-radius: 2px;
+	    }
+	    
+	    .login_box:focus {
+	    	border-radius: 2px; 
+	    	outline: 1px #827ffe solid;
+	    }
+	    
+	    input::placeholder {
+		  color: #8f8fa1;
+		}
+	    
+	    .submit_b {
+	    	display: inline-block;
+	    	border: none;
+	    	width: 266px;
+	    	padding: 12px 82px;
+	    	background-color: #827ffe;
+	    	color: white;
+	    	border-radius: 2px;
+	    }
+         .submit_b:hover {
+	    	background-color: #403866;
+	    }
+	</style>
+	<script>
+		function login_message(){
+			var username = document.getElementById("username");
+			var password = document.getElementById("password");
+			if(username.value == '') {
+				alert(username.parentNode.dataset.validate);
+				return false;
+			}
+			if(password.value == '') {
+				alert(password.parentNode.dataset.validate);
+				return false;
+			}
+		}	
+		function login() {
+			return login_message();
+		}
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div class="sub_container">
+			<div class="nameform">
+				<div class="name_box">
+			        <div class="font15">로그인</div>
+			    </div>
+			    <div class="">
+			        <form id="login-form" action="login" method="POST" onsubmit="return login();">
+			            <div class="" data-validate = "Enter your name">
+			                <input type="text" id="username" class="login_box font15" name="username" placeholder="User id" autofocus>
+			            </div>
+			            <div class="" data-validate = "Enter your password">
+			            	<input type="password" id="password" class="login_box font15" name="password" placeholder="Password">
+			            </div>
+			            <div>
+			                <button type="submit" class="submit_b font15">Log in</button>
+						</div>
+					</form>
+					<div>
+						<a class="font16" href="signUp">회원가입</a>
+					</div>
+			    </div>
+			</div>
+		</div>
+	 </div>
+</body>
+</html>
