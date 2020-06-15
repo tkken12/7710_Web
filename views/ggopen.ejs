@@ -25,23 +25,28 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="index.html">모두모두 모여라</a>
-            
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="/">모두모두 모여라</a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarResponsive">
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link" href="login/login.html">login</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="mypage.html">mypage</a>
-                  </li>
+                    <% if(!isAuthenticated){ %>
+                    <li class="nav-item">
+                    <li class="nav-item"><a class="nav-link" href="/login"> My page </a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login"> Login </a></li>
+                    </li>
+                    <% } else { %>
+                    <li class="nav-item"><a class="nav-link" href="/mypage">My page</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout">logout</a></li>
+                    <% } %>
                 </ul>
-              </div>
             </div>
+        </div>
         </div>
     </nav>
 
@@ -59,56 +64,83 @@
             </div>
         </div>
     </header>
-    
+
 
     <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <p>당신과 같은 제품을 구매하고자 하는 사람들을 모아보세요!</p>
-                <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
-                <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
-                <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
-                <form name="sentMessage" id="contactForm" novalidate>
-                    <div class="control-group">
-                        <div class="form-group floating-label-form-group controls">
-                            <label>공동구매 제품 설명</label>
-                            <textarea rows="5" class="form-control" placeholder="공동구매 제품 설명" id="infomation" required data-validation-required-message="Please enter a product infomation."></textarea>
-                            <p class="help-block text-danger"></p>
+    <form action="/open<%= getPostQueryString() %>" method="post">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <p>당신과 같은 제품을 구매하고자 하는 사람들을 모아보세요!<%=username%></p>
+
+                    <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+                    <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+                    <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+                    <form name="sentMessage" id="contactForm" novalidate>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>작성자</label>
+                                <input type='text' class="form-control" placeholder="작성자 기입" id="creator"
+                                    required
+                                    data-validation-required-message="Please enter a creator.">
+                                <p class="help-block text-danger"></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="control-group">
-                        <div class="form-group floating-label-form-group controls">
-                            <label>참여 기간</label>
-                            <input type="text" class="form-control" placeholder="참여 기간" id="duration" required data-validation-required-message="Please enter duration of participation.">
-                            <p class="help-block text-danger"></p>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>공동구매 제품 설명</label>
+                                <textarea rows="5" class="form-control" placeholder="공동구매 제품 설명" id="infomation"
+                                    required
+                                    data-validation-required-message="Please enter a product infomation."></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="control-group">
-                        <div class="form-group floating-label-form-group controls">
-                            <label>오픈채팅 링크</label>
-                            <input type="email" class="form-control" placeholder="오픈채팅 링크" id="link" required data-validation-required-message="Please enter open chatting link.">
-                            <p class="help-block text-danger"></p>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>참여 기간</label>
+                                <input type="number" class="form-control" placeholder="참여 기간" id="duration" required
+                                    data-validation-required-message="Please enter duration of participation.">
+                                <p class="help-block text-danger"></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="control-group">
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>kakao id</label>
-                            <input type="tel" class="form-control" placeholder="kakao id" id="kakaoid" required data-validation-required-message="Please enter your kakao id.">
-                            <p class="help-block text-danger"></p>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>오픈채팅 링크</label>
+                                <input type="email" class="form-control" placeholder="오픈채팅 링크" id="link" required
+                                    data-validation-required-message="Please enter open chatting link.">
+                                <p class="help-block text-danger"></p>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <br>
-                    <div id="success"></div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
-                    </div>
-                </form>
+                        <div class="control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>kakao id</label>
+                                <input type="tel" class="form-control" placeholder="kakao id" id="kakaoid" required
+                                    data-validation-required-message="Please enter your kakao id.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>최대 참여 인원수</label>
+                                <input type="number" class="form-control" placeholder="최대 참여 인원" id="maxParticipants"
+                                    required
+                                    data-validation-required-message="Please enter maximum participation.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div id="success"></div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
+    </form>
     <hr>
 
     <!-- Footer -->
@@ -130,7 +162,7 @@
     <script src="js/clean-blog.min.js"></script>
 
     <script>
-        $(document).ready( function() {
+        $(document).ready(function () {
             $("#navbarResponsive").load("/header.html");
         });
     </script>

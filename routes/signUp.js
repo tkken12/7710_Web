@@ -26,6 +26,7 @@ router.post("/", (req, res, next) => {
                   username: req.body.username,
                   password: crypto.createHash('sha512').update(req.body.password).digest('base64'),
                   kakaoid: req.body.kakaoid
+                  
               })
               user
                   .save()
@@ -36,7 +37,7 @@ router.post("/", (req, res, next) => {
                       console.log(err);
                   })
           }
-      });
+      })
 });
 
 

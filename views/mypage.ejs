@@ -23,7 +23,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="index.ejs">모두모두 모여라</a>
+            <a class="navbar-brand" href="/">모두모두 모여라</a>
             
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
@@ -31,11 +31,15 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link" href="/">logout</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="mypage.ejs">My page</a>
+                    <% if(!isAuthenticated){ %>
+                        <li class="nav-item">
+                        <li class="nav-item"><a class="nav-link" href="/login"> My page </a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login"> Login </a></li>
+                        </li>
+                        <% } else { %>
+                        <li class="nav-item"><a class="nav-link" href="/mypage">My page</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/logout">logout</a></li>
+                        <% } %>
                   </li>
                 </ul>
               </div>
@@ -91,6 +95,9 @@
                     </p>
                 </div>
                 <hr>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" id="sendMessageButton">모여라 열기</button>
+                </div>
             </div>
         </div>
     </div>
@@ -101,6 +108,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
+                    <input type="button" value="공구 생성" onClick="location.href='/open'">
                     <!-- <p class="copyright text-muted">Copyright &copy; 2020</p> -->
                 </div>
             </div>

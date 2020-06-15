@@ -8,6 +8,7 @@ const bodyParser = require('body-parser')
 const flash = require('connect-flash')
 const session = require('express-session')
 const passport = require('passport')
+const util = require('./util')
 
 // call mongo
 const mongoose = require('mongoose')
@@ -16,6 +17,8 @@ const mongoUri = 'mongodb://localhost/7710'
 //route path 
 const indexRouter = require('./routes/index')
 const signUpRouter = require('./routes/signUp')
+const myPageRouter = require('./routes/myPage')
+const open = require('./routes/open')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,8 +31,6 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 // mongo connection & setting
 mongoose.set('useNewUrlParser', true)
@@ -54,7 +55,7 @@ app.use(session({
   resave: true,
   saveUninitialized: false
 }))
-app.use(flash())
+app.use(flash()) //1회성 메시지를 내보낼때 사용
 app.use(passport.initialize()) // passport 구동
 app.use(passport.session())
 
@@ -63,6 +64,7 @@ app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated() // req.isAuthenticate()는 passport에서 제공하는 함수로, 현재 로그인이 되어있는지 아닌지를 true, false로 리턴, res.locals.isAuthenticated는 ejs에서 user가 로그인 되어있는지 아닌지 확인
   res.locals.currentUser = req.user // req.user는 passport에서 추가하는 항목으로 로그인이 되면 session으로 부터 user를 deserialize하여 생성, res.locals는 req.user와 req.isAuthenticated를 담는데 ejs에서 바로 사용 가능, res.locals.currentUser는 user 정보를 불러오는데 사용
   //res.locals.util = util
+  
   next()
 })
 
@@ -80,6 +82,7 @@ app.use(function (err, req, res, next) {
 //call route
 app.use('/', indexRouter);
 app.use('/signup', signUpRouter)
-
+app.use('/mypage', myPageRouter)
+app.use('/open', util.getPostQueryString, open)
 
 module.exports = app;
