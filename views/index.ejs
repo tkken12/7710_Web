@@ -50,6 +50,7 @@
     <!-- Page Header -->
     <header class="masthead">
         <div class="overlay"></div>
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
@@ -69,16 +70,17 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <% if(!isAuthenticated){ %>
+                 <!-- DB에서 전체 게시글 호출 -->
+                <% post.forEach(function(list){ %> 
                 <div class="post-preview">
-                    <a href="#">
+                    <a href="/join/<%=list._id%>"> <!-- post._id 하니까 조회안됬음. func의 parameter를 넣어야함 1시간 삽질-->
 
                         <div>
                             <h2 class="post-title">
-                                IKEA 책상공구
+                                <%= list.information %> <!-- 해당 id를 가진 유저가 작성한 인포 이하 동문-->
                             </h2>
                             <h3 class="post-subtitle">
-                                진행상황 : 100%
+                                <%= list.joinUsers.length %>명
                             </h3>
                         </div>
                         <div>
@@ -87,13 +89,14 @@
                             </h3>
                         </div>
                     </a>
-                    <p class="post-meta">참여기간:
-                        <a href="#">2020.02.10</a>
+                    <p class="post-meta">참여기간: <!-- 지금은 현재 시간이지만 나중엔 파싱하고 남은 기간 표기-->
+                        <%= list.createdAt %>
                     </p>
                 </div>
-            <% } %>
-                <hr>
+                <% }) %>
                 
+                <hr>
+
                 <div class="form-group">
                     <% if(isAuthenticated){ %>
                     <button type="button" class="btn btn-primary" id="sendMessageButton"

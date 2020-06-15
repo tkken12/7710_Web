@@ -1,49 +1,40 @@
 const mongoose = require('mongoose')
 
-let postSchema = mongoose.Schema({
+let Schema = mongoose.Schema
 
+let joinSchema = new Schema({
+    joinUser: String,
+    quantity: Number
+})
+
+let postSchema = new Schema({
     creator: { //개설자 구분을 위한 스키마
-        type: String,
-        required: {
-            type: mongoose.Schema.Types.ObjectId, //users.id와 post의 creator와 연결
-            ref: 'users',
-            required: true
+        type: String
     },
     information: {
-        type: String,
-        required: [true, '제품 설명을 작성해주세요']
+        type: String
     },
     duration: {
-        type: String,
-        required: [true, '참여 기간을 작성해주세요.'],
-        match: [/^[0-9]+$/, '숫자만 입력 해주세요.']
+        type: Number
     },
-    link: {
-        type: String,
-        required: [true, 'kakao Open 채팅 링크를 작성하여 주십시오.']
+    link: { // 기입안됨
+        type: String 
     },
-    kakaoid: {
-        type: String,
-       
-        }
+    kakaoid: { //기입안됨
+        type: String 
     },
-    /*maxParticipants: { // 최대 참여인원수 지정
-        type: Number,
-        required: [true, '최대 참여자를 선택해주세요.'],
-        //match: [/^.{1}[1-5]+$/, '최대 5명까지 참여가능합니다.']
-    },*/
+    maxParticipants: { // 최대 참여인원수 지정 기입안됨
+        type: Number
+    },
     currentUser: {
-        type: [String] // username 저장 최대 5개
-
+        type: [mongoose.Schema.Types.ObjectId, String] // username 저장 최대 5개
     },
-
     createdAt: {
         type: Date,
         default: Date.now
-    }
-
+    },
+    joinUsers: [joinSchema]
 
 });
 
-let Post = mongoose.model('post', postSchema);
-module.exports = Post;
+module.exports = mongoose.model('post', postSchema)

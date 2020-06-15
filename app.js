@@ -85,4 +85,6 @@ app.use('/signup', signUpRouter)
 app.use('/mypage', myPageRouter)
 app.use('/open', util.getPostQueryString, open)
 
+
+
 module.exports = app;

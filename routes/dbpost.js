@@ -4,7 +4,7 @@ const Post = require('../model/post')
 const util = require('../util')
 
 /*  ----- set  CRUD ----- */
-rrouter.get('/', async (req, res) => { // 동기식 처리
+router.get('/', async (req, res) => { // 동기식 처리
     let page = Math.max(1, parseInt(req.query.page)); // 쿼리 스트링으로 받은 page, limit을 req.query를 통해 받아옴
     let limit = Math.max(1, parseInt(req.query.limit)); // Math.max는 page, limit이 양수이어야 하므로 선택, parseInt는 query로 날라오는 문자열이 숫자일수도 있고 아닐수도 있어서 사용
     page = !isNaN(page) ? page : 1; // 만약 query 스트링으로 오는 값이 정수로 변환이 불가능 할 경우 기본값을 이용하기 위해 설정한다.

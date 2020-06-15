@@ -67,12 +67,13 @@
 
 
     <!-- Main Content -->
-    <form action="/open<%= getPostQueryString() %>" method="post">
+    <form action="/open/create" method="post">
 
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
-                    <p>당신과 같은 제품을 구매하고자 하는 사람들을 모아보세요!<%=username%></p>
+                    <!-- id를 name으로 변경 -->
+                    <p>당신과 같은 제품을 구매하고자 하는 사람들을 모아보세요!</p>
 
                     <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
                     <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
@@ -81,8 +82,7 @@
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls">
                                 <label>작성자</label>
-                                <input type='text' class="form-control" placeholder="작성자 기입" id="creator"
-                                    required
+                                <input type='text' class="form-control" placeholder="작성자 기입" name="creator" required
                                     data-validation-required-message="Please enter a creator.">
                                 <p class="help-block text-danger"></p>
                             </div>
@@ -90,16 +90,16 @@
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls">
                                 <label>공동구매 제품 설명</label>
-                                <textarea rows="5" class="form-control" placeholder="공동구매 제품 설명" id="infomation"
+                                <textarea rows="5" class="form-control" placeholder="공동구매 제품 설명" name="information"
                                     required
-                                    data-validation-required-message="Please enter a product infomation."></textarea>
+                                    data-validation-required-message="Please enter a product information."></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls">
                                 <label>참여 기간</label>
-                                <input type="number" class="form-control" placeholder="참여 기간" id="duration" required
+                                <input type="number" class="form-control" placeholder="참여 기간" name="duration" required
                                     data-validation-required-message="Please enter duration of participation.">
                                 <p class="help-block text-danger"></p>
                             </div>
@@ -107,7 +107,7 @@
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls">
                                 <label>오픈채팅 링크</label>
-                                <input type="email" class="form-control" placeholder="오픈채팅 링크" id="link" required
+                                <input type="email" class="form-control" placeholder="오픈채팅 링크" name="link" required
                                     data-validation-required-message="Please enter open chatting link.">
                                 <p class="help-block text-danger"></p>
                             </div>
@@ -115,7 +115,7 @@
                         <div class="control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>kakao id</label>
-                                <input type="tel" class="form-control" placeholder="kakao id" id="kakaoid" required
+                                <input type="tel" class="form-control" placeholder="kakao id" name="kakaoid" required
                                     data-validation-required-message="Please enter your kakao id.">
                                 <p class="help-block text-danger"></p>
                             </div>
@@ -123,9 +123,8 @@
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls">
                                 <label>최대 참여 인원수</label>
-                                <input type="number" class="form-control" placeholder="최대 참여 인원" id="maxParticipants"
-                                    required
-                                    data-validation-required-message="Please enter maximum participation.">
+                                <input type="number" class="form-control" placeholder="최대 참여 인원" name="maxParticipants"
+                                    required data-validation-required-message="Please enter maximum participation.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
