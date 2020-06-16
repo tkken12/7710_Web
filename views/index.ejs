@@ -35,7 +35,7 @@
                 <ul class="navbar-nav ml-auto">
                     <% if(isAuthenticated){ %>
                     <li class="nav-item"><a class="nav-link" href="/mypage">My page</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/logout">logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
                     <% } else { %>
                     <li class="nav-item"><a class="nav-link" href="/login"> My page </a></li>
                     <li class="nav-item"><a class="nav-link" href="/login"> Login </a></li>
@@ -77,10 +77,10 @@
 
                         <div>
                             <h2 class="post-title">
-                                <%= list.information %> <!-- 해당 id를 가진 유저가 작성한 인포 이하 동문-->
+                                <%= list.product %> <!-- 해당 id를 가진 유저가 작성한 인포 이하 동문-->
                             </h2>
                             <h3 class="post-subtitle">
-                                <%= list.joinUsers.length %>명
+                                <%= list.currentUser.length %>명
                             </h3>
                         </div>
                         <div>
@@ -90,7 +90,7 @@
                         </div>
                     </a>
                     <p class="post-meta">참여기간: <!-- 지금은 현재 시간이지만 나중엔 파싱하고 남은 기간 표기-->
-                        <%= list.createdAt %>
+                        <%= list.createdAt  %>
                     </p>
                 </div>
                 <% }) %>

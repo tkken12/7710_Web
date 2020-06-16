@@ -4,14 +4,17 @@ let Schema = mongoose.Schema
 
 // 조인 유저를 위한 스키마
 let joinSchema = new Schema({
-    joinUser: String,
-    quantity: Number
+    joinUsers: String
+    //quantity: Number
 })
 
 // 게시글 스키마
 let postSchema = new Schema({
     creator: { //개설자 구분을 위한 스키마
         type: String
+    },
+    product:{
+        type:String
     },
     information: {
         type: String
@@ -29,10 +32,9 @@ let postSchema = new Schema({
         type: Number
     },
     createdAt: {
-        type: Date,
-        default: Date.now
+        type: String
     },
-    joinUsers: [joinSchema]
+    currentUser : [joinSchema]
 
 });
 

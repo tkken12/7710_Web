@@ -89,6 +89,15 @@
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls">
+                                <label>공동구매 할 제품</label>
+                                <textarea rows="5" class="form-control" placeholder="공동구매 제품" name="product"
+                                    required
+                                    data-validation-required-message="Please enter a product name."></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
                                 <label>공동구매 제품 설명</label>
                                 <textarea rows="5" class="form-control" placeholder="공동구매 제품 설명" name="information"
                                     required
@@ -99,7 +108,7 @@
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls">
                                 <label>참여 기간</label>
-                                <input type="number" class="form-control" placeholder="참여 기간" name="duration" required
+                                <input type="text" class="form-control" placeholder="참여 기간" name="duration" required
                                     data-validation-required-message="Please enter duration of participation.">
                                 <p class="help-block text-danger"></p>
                             </div>
