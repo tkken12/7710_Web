@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const schema = require('../model/users')
 const crypto = require('crypto')
 const Post = require('../model/post');
+const Join = require('../model/join')
 
 /* GET home page. */
 router.get('/', (req, res) => {
@@ -17,19 +18,44 @@ router.get('/', (req, res) => {
         console.log(err) // 호출에 실패하면 로그
       } else {
         res.render("index", { // 성공하면 ejs 변수명에 db 정보 보냄
-          post:post
+          post: post
         })
       }
     })
 })
+
 // 게시글 클릭시 조인 페이지로 이동
 router.get('/join/:id', (req, res) => {
   console.log(req.params._id)
-  Post.findOne({_id: req.params.id}, (err, post) => {
-    if(err) console.log(req.params.id + 'ID 확인')
-    res.render('ggjoin', {post:post})
+  Post.findOne({
+    _id: req.params.id
+  }, (err, post) => {
+    if (err) console.log(req.params.id + 'ID 확인')
+    res.render('ggjoin', {
+      post: post
+    })
   })
 })
+
+router.post('/join/push/:id', (req, res) => {
+  let join = new Join()
+  Join.quantity = req.body.quantity
+  Join.joinUser = req.body.joinUser
+  Post.findOneAndUpdate({
+    _id: req.body.id
+  }, {
+    $push: {
+      quantity: quantity,
+      joinUser: joinUser
+    }
+  }, (err, post) => {
+    if (err) {
+      console.log('조인확인'+req.body.quantity)
+    }
+    res.redirect('/')
+  })
+})
+
 
 /* GET login page -> 라우팅 받은 경로가 기준이 됨, 즉 app.js에서 라우팅을 '/'으로 받아서 localhost:port/login이 됨 */
 router.get('/login', (req, res, next) => {

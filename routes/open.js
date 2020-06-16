@@ -11,22 +11,19 @@ router.get('/', (req, res) => { // 동기식 처리
 // create
 router.post('/create', (req, res) => {
     let post = new Post()
-    post.creator = req.body.creator // 스키마앞에 생성자 이름 안넣어주면 인서트 못함 이걸로 1시간 삽질
+    post.creator = req.body.creator // 스키마앞에 인스턴스 이름 안넣어주면 인서트 못함 이걸로 1시간 삽질
     post.information = req.body.information
     post.duration = req.body.duration
     post.link = req.body.link
     post.kakaoid = req.body.kakaoid
     post.maxParticipants = req.body.maxParticipants
-    currentUser = {
-        type: [post.creator, String]
-    }
-
+    
     post.save((err) => {
         if (err) {
             console.log(err)
         }
         res.redirect('/')
-        console.log(JSON.stringify(req.body))
+        //console.log(JSON.stringify(req.body))
         
     })
 })

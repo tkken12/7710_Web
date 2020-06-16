@@ -83,14 +83,17 @@
                     <div class="control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>참여 수량</label>
-                            <input type="number" class="form-control" placeholder="참여 수량" name="quantity" value="<%=list._id%>" required data-validation-required-message="Please enter Participation quantity." >
+                            <input type="number" class="form-control" placeholder="참여 수량" name="quantity" value="<%=post._id%>" required data-validation-required-message="Please enter Participation quantity." >
+                            <p class="help-block text-danger"></p>
+                            <label>유저 이름</label>
+                            <input type="text" class="form-control" placeholder="유저 이름" name="joinUser"  required data-validation-required-message="Please enter Participation quantity." >
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     
                     <br>
                     <div id="success"></div>
-                    <form action=""
+                    <form action="post">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary" id="sendMessageButton" onclick="fn_quantity()">Send</button>
                     </div>
