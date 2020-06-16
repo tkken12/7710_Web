@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
 
 router.post("/", (req, res, next) => {
 
+    //회원가입을 위한 미들웨어
   schema.find({
           username: req.body.username
       })

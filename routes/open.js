@@ -8,6 +8,8 @@ router.get('/', (req, res) => { // 동기식 처리
     res.render('ggopen')
 })
 
+
+//해당 미들웨어는 몽고디비에 정보를 저장하기 위해서만 존재
 // create
 router.post('/create', (req, res) => {
     let post = new Post()

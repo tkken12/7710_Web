@@ -9,23 +9,23 @@ const crypto = require('crypto')
 const Post = require('../model/post');
 const Join = require('../model/join')
 
-/* GET home page. */
+/* GET home page. --> index.ejs를 시각화 */ 
 router.get('/', (req, res) => {
-  Post.find({})
+  Post.find({}) // 몽고디비에서 현재 저장된 게시글을 모두 내림차순으로 정렬시키고 호출
     .sort("-createdAt") //내림차순으로 정렬
-    .exec((err, post) => {
+    .exec((err, post) => {//db에있는 게시글을 홈페이지에 넘겨줌
       if (err) {
         console.log(err) // 호출에 실패하면 로그
       } else {
         res.render("index", { // 성공하면 ejs 변수명에 db 정보 보냄
-          post: post
+          post: post // ejs에서 사용할 변수
         })
       }
     })
 })
 
 // 게시글 클릭시 조인 페이지로 이동
-router.get('/join/:id', (req, res) => {
+router.get('/join/:id', (req, res) => { // mongodb ID 호출
   console.log(req.params._id)
   Post.findOne({
     _id: req.params.id
@@ -37,6 +37,7 @@ router.get('/join/:id', (req, res) => {
   })
 })
 
+ //join 할때 몽고디비에 저장시키기 위한 쿼리요청
 router.post('/join/push/:id', (req, res) => {
   let join = new Join()
   Join.quantity = req.body.quantity
@@ -62,6 +63,7 @@ router.get('/login', (req, res, next) => {
   res.render('login')
 })
 
+//세션에 로그인 정보 저장
 passport.serializeUser((user, done) => {
   done(null, user)
 })
@@ -70,6 +72,7 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
+//로그인화면에서 로그인을 할때 쿠키에 어떻게 저장되는지 
 //로그인 정보를 클라이언트 사이드가 가지게 됨
 passport.use(new LocalStrategy({
     usernameField: 'username',
@@ -92,6 +95,7 @@ passport.use(new LocalStrategy({
   }
 ));
 
+// 현재 클라이언트가 로그인이 안되어있으면 강제로 로그인화면으로 이동
 router.post('/login', passport.authenticate('local', {
     failureRedirect: '/login',
     failureFlash: true
